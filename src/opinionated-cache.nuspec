@@ -20,4 +20,7 @@
 	<file src="OpinionatedCache.SQL\bin\$configuration$\OpinionatedCache.SQL.dll" target="lib\net45\" />
 	<file src="OpinionatedCache.Web\bin\$configuration$\OpinionatedCache.Web.dll" target="lib\net45\" />
   </files>
+  <dependencies>
+    <dependency id="Microsoft.Practices.Unity" version="3.5.0" />
+  </dependencies>
 </package>
