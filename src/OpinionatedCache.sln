@@ -12,6 +12,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BF489FCB-6741-437D-964C-E765F306E952}"
 	ProjectSection(SolutionItems) = preProject
 		build.bat = build.bat
+		NuGet.config = NuGet.config
 		opinionated-cache.nuspec = opinionated-cache.nuspec
 	EndProjectSection
 EndProject
