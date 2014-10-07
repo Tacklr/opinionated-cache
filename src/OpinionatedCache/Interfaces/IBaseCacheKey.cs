@@ -1,12 +1,10 @@
-﻿using OpinionatedCache.Policy;
-
-namespace OpinionatedCache.API
+﻿namespace OpinionatedCache.API
 {
     public interface IBaseCacheKey
     {
         string Key { get; }
         string PolicyKey { get; }
-        CachePolicy DefaultPolicy { get; }
-        CachePolicy Policy { get; }
+        ICachePolicy DefaultPolicy { get; }
+        ICachePolicy Policy { get; }
     }
 }

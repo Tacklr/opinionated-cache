@@ -1,5 +1,4 @@
-﻿
-namespace OpinionatedCache.API
+﻿namespace OpinionatedCache.API
 {
     public enum FreshnessRequest
     {

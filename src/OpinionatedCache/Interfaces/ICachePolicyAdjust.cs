@@ -1,8 +1,7 @@
-﻿using OpinionatedCache.Policy;
-namespace OpinionatedCache.API
+﻿namespace OpinionatedCache.API
 {
     public interface ICachePolicyAdjust
     {
-        CachePolicy Adjust(CachePolicy policy);
+        ICachePolicy Adjust(ICachePolicy policy);
     }
 }

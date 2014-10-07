@@ -1,6 +1,5 @@
 ﻿using System;
 using OpinionatedCache.API;
-using OpinionatedCache.Policy;
 
 namespace OpinionatedCache.Web
 {
@@ -9,7 +8,7 @@ namespace OpinionatedCache.Web
     {
         public CacheAddParameters(
             string name
-            , CachePolicy policy
+            , ICachePolicy policy
             , Func<FreshnessRequest, T> filler
             , Action<CacheAddParameters<T>, T> putter)
             : base(

@@ -49,7 +49,7 @@ namespace OpinionatedCache.Web
 
         public BaseCacheAddParameters(
             string name
-            , CachePolicy policy
+            , ICachePolicy policy
             , Func<FreshnessRequest, object> filler
             , Action<BaseCacheAddParameters, object> putter)
         {

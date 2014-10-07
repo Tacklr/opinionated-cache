@@ -5,7 +5,6 @@ using System.Threading;
 using System.Web;
 using System.Web.Caching;
 using OpinionatedCache.API;
-using OpinionatedCache.Policy;
 using OpinionatedCache.SQL;
 using OpinionatedCache.Web;
 
@@ -191,7 +190,7 @@ namespace OpinionatedCache.Caches
             // clear ALL cache if null return from backing store used to be here...
 
             // do NOT store in cache yet, this is not the correct answer-set type yet.
-            var elementPolicies = new CachePolicy[keyProjections.Length];
+            var elementPolicies = new ICachePolicy[keyProjections.Length];
             keys = new List<IBaseCacheKey>(list.Count);
 
             foreach (var element in list)
@@ -250,7 +249,7 @@ namespace OpinionatedCache.Caches
                 , filler);
         }
 
-        internal virtual CacheAddParameters<T> BuildParameters<T>(string name, CachePolicy policy, Func<FreshnessRequest, T> filler)
+        internal virtual CacheAddParameters<T> BuildParameters<T>(string name, ICachePolicy policy, Func<FreshnessRequest, T> filler)
            where T : class
         {
             return new CacheAddParameters<T>(

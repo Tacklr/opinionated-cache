@@ -9,7 +9,7 @@ namespace OpinionatedCache.Settings
     {
         private static Dictionary<string, ICachePolicyAdjust> s_Cache = new Dictionary<string, ICachePolicyAdjust>();
 
-        public CachePolicy ComputePolicy(string key, CachePolicy defaultPolicy)
+        public ICachePolicy ComputePolicy(string key, ICachePolicy defaultPolicy)
         {
             ICachePolicyAdjust adjuster;
             if (!s_Cache.TryGetValue(key, out adjuster))
@@ -24,7 +24,7 @@ namespace OpinionatedCache.Settings
                 return defaultPolicy.Clone();   // do nothing, it's easy
         }
 
-        private ICachePolicyAdjust ReadAdjustment(string policyKey, CachePolicy basePolicy)
+        private ICachePolicyAdjust ReadAdjustment(string policyKey, ICachePolicy basePolicy)
         {
             var config = ConfigurationManager.GetSection("cachePolicies") as CachePolicySection;
 
@@ -59,9 +59,9 @@ namespace OpinionatedCache.Settings
 
     public class ApplicationSettingPolicyAdjust : ICachePolicyAdjust
     {
-        public CachePolicy ConfiguredPolicy { get; set; }
+        public ICachePolicy ConfiguredPolicy { get; set; }
 
-        public CachePolicy Adjust(CachePolicy policy)
+        public ICachePolicy Adjust(ICachePolicy policy)
         {
             if (ConfiguredPolicy.AbsoluteSeconds != policy.AbsoluteSeconds
                 || ConfiguredPolicy.SlidingSeconds != policy.SlidingSeconds

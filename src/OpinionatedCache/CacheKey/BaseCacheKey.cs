@@ -1,12 +1,15 @@
-﻿using Microsoft.Practices.Unity;
-using OpinionatedCache.Policy;
+﻿using OpinionatedCache.Policy;
 
 namespace OpinionatedCache.API.CacheKey
 {
     public abstract class BaseCacheKey : IBaseCacheKey
     {
-        [Dependency]
-        public IUnityContainer Container { get; set; }
+        public static ICachePolicyRepository PolicyRepository { get; set; }
+
+        static BaseCacheKey()
+        {
+            PolicyRepository = DefaultCachePolicyRepository.Instance;   // allow someone to override the policy management, but the default does nothing.
+        }
 
         private string Prefix;
 
@@ -46,7 +49,7 @@ namespace OpinionatedCache.API.CacheKey
             }
         }
 
-        public virtual CachePolicy DefaultPolicy
+        public virtual ICachePolicy DefaultPolicy
         {
             get
             {
@@ -54,15 +57,14 @@ namespace OpinionatedCache.API.CacheKey
             }
         }
 
-        public virtual CachePolicy Policy
+        public virtual ICachePolicy Policy
         {
             get
             {
                 // lookup in the config the policy for the official key-and-parameters given
                 var policyKey = PolicyKey;
                 var defaultPolicy = DefaultPolicy;
-                var policyRepo = Container.Resolve<ICachePolicyRepository>();
-                return policyRepo.ComputePolicy(policyKey, defaultPolicy); // lookup the policy via the provider
+                return PolicyRepository.ComputePolicy(policyKey, defaultPolicy); // lookup the policy via the provider
             }
         }
     }

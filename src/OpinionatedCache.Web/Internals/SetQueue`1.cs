@@ -45,7 +45,7 @@ namespace OpinionatedCache.Web
                 var item = queue.Dequeue();
 
                 if (!duplicates.ContainsKey(item))
-                    throw new InvalidOperationException("The dictionary should have contained an item");
+                    throw new InvalidOperationException("The dictionary should contain an item");
                 else
                     duplicates.Remove(item);
 

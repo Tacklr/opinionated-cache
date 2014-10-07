@@ -1,6 +1,8 @@
-﻿namespace OpinionatedCache.Policy
+﻿using OpinionatedCache.API;
+
+namespace OpinionatedCache.Policy
 {
-    public class CachePolicy
+    public class CachePolicy : ICachePolicy
     {
         public static readonly int Unused = -1;
         public static readonly int Infinite = -2;
@@ -16,7 +18,7 @@
             RefillCount = CachePolicy.Unused;
         }
 
-        public virtual CachePolicy Clone()
+        public virtual ICachePolicy Clone()
         {
             return new CachePolicy
                 {
@@ -26,12 +28,12 @@
                 };
         }
 
-        public static CachePolicy Sliding(int seconds)
+        public static ICachePolicy Sliding(int seconds)
         {
             return new CachePolicy { SlidingSeconds = seconds };
         }
 
-        public static CachePolicy Absolute(int seconds)
+        public static ICachePolicy Absolute(int seconds)
         {
             return new CachePolicy { AbsoluteSeconds = seconds };
         }

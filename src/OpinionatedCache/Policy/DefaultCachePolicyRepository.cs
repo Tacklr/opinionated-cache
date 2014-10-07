@@ -4,7 +4,9 @@ namespace OpinionatedCache.Policy
 {
     public class DefaultCachePolicyRepository : ICachePolicyRepository
     {
-        public CachePolicy ComputePolicy(string policyKey, CachePolicy defaultPolicy)
+        public static readonly ICachePolicyRepository Instance = new DefaultCachePolicyRepository();
+
+        public ICachePolicy ComputePolicy(string policyKey, ICachePolicy defaultPolicy)
         {
             // do nothing, it's easy
             return UnchangedPolicyAdjust.Instance.Adjust(defaultPolicy);
@@ -13,11 +15,9 @@ namespace OpinionatedCache.Policy
 
     public class UnchangedPolicyAdjust : ICachePolicyAdjust
     {
-        private static ICachePolicyAdjust s_Instance = new UnchangedPolicyAdjust();
+        public static readonly ICachePolicyAdjust Instance = new UnchangedPolicyAdjust();
 
-        public static ICachePolicyAdjust Instance { get { return s_Instance; } }
-
-        public CachePolicy Adjust(CachePolicy policy)
+        public ICachePolicy Adjust(ICachePolicy policy)
         {
             return policy;
         }
