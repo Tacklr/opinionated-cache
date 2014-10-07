@@ -15,7 +15,7 @@
     <copyright>Copyright &#x00A9; Tacklr, LLC.  All rights reserved.</copyright>
     <tags>cache cachepolicy httpcache</tags>
     <dependencies>
-      <dependency id="Microsoft.Practices.Unity" version="3.5.0" />
+      <dependency id="Unity" version="3.5" />
     </dependencies>
   </metadata>
   <files>
