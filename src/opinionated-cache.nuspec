@@ -8,7 +8,7 @@
     <owners>Tacklr</owners>
     <licenseUrl>https://github.com/Tacklr/opinionated-cache/blob/master/LICENSE.md</licenseUrl>
     <projectUrl>https://github.com/Tacklr/opinionated-cache/</projectUrl>
-    <iconUrl>https://avatars1.githubusercontent.com/u/7947193?v=2&u=a56a53d27a919ea3f37de98079408475e22b8186&s=140</iconUrl>
+    <iconUrl>https://avatars1.githubusercontent.com/u/7947193?v=2&amp;u=a56a53d27a919ea3f37de98079408475e22b8186&amp;s=140</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Opinionated Cache provides a framework for consistent cache key and cache policy management for a (potentially multi-level) cache store with backing store.</description>
     <releaseNotes></releaseNotes>
