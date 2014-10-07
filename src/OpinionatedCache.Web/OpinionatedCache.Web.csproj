@@ -34,6 +34,8 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
@@ -43,16 +45,13 @@
     <Compile Include="ApplicationSettings\CachePolicySection.cs" />
     <Compile Include="Internals\BaseCacheAddParameters.cs" />
     <Compile Include="Internals\CacheAddParameters`1.cs" />
+    <Compile Include="Internals\Extensions.cs" />
     <Compile Include="Internals\HttpCacheShim.cs" />
     <Compile Include="Internals\SetQueue`1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Internals\RefillerKeyAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Opinionated.SQL\OpinionatedCache.SQL.csproj">
-      <Project>{a84eefe4-01ab-4b67-88b5-ec53ba786c83}</Project>
-      <Name>OpinionatedCache.SQL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\OpinionatedCache\OpinionatedCache.csproj">
       <Project>{57e2bbe9-c16e-4201-9ee3-7cb28cbfcaac}</Project>
       <Name>OpinionatedCache</Name>

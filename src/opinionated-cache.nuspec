@@ -20,7 +20,6 @@
   </metadata>
   <files>
 	<file src="OpinionatedCache\bin\$configuration$\OpinionatedCache.dll" target="lib\net45\" />
-	<file src="OpinionatedCache.SQL\bin\$configuration$\OpinionatedCache.SQL.dll" target="lib\net45\" />
 	<file src="OpinionatedCache.Web\bin\$configuration$\OpinionatedCache.Web.dll" target="lib\net45\" />
   </files>
 </package>
