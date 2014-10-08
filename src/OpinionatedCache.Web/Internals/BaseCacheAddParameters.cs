@@ -1,4 +1,6 @@
-﻿using System;
+﻿﻿// Licensed under the MIT License. See LICENSE.md in the project root for more information.
+
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Web.Caching;

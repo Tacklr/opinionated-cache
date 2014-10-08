@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿﻿// Licensed under the MIT License. See LICENSE.md in the project root for more information.
+
+using System.Collections.Generic;
 using System.Configuration;
 using OpinionatedCache.API;
 using OpinionatedCache.Policy;

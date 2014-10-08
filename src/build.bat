@@ -1,4 +1,6 @@
 @echo Off
+rem ﻿Licensed under the MIT License. See LICENSE.md in the project root for more information.
+
 set config=%1
 if "%config%" == "" (
    set config=Release

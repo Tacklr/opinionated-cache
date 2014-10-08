@@ -1,4 +1,6 @@
-﻿using System;
+﻿﻿// Licensed under the MIT License. See LICENSE.md in the project root for more information.
+
+using System;
 using System.Data.SqlClient;
 using System.Transactions;
 
@@ -6,6 +8,9 @@ namespace OpinionatedCache.SQL
 {
     public static class Utility
     {
+        /// TODO: This really should be something we expect the IBackingStore to provide once we factor that out...
+        /// in the case of SQL Server(ish) this is fine, but we going forward to other backing stores we need
+        /// this to be pluggable.
         public static bool IsWorthRetry(this Exception ex)
         {
             if (ex is TransactionException)

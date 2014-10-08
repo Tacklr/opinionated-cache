@@ -1,6 +1,8 @@
 ﻿using System;
 using OpinionatedCache.API;
 
+﻿// Licensed under the MIT License. See LICENSE.md in the project root for more information.
+
 namespace OpinionatedCache.Web
 {
     internal class CacheAddParameters<T> : BaseCacheAddParameters
