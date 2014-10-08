@@ -4,7 +4,7 @@ using System.Configuration;
 
 namespace OpinionatedCache.Settings
 {
-    public class CachePolicyConfigConfigCollection : ConfigurationElementCollection
+    public class CachePolicyConfigurationCollection : ConfigurationElementCollection
     {
         protected override ConfigurationElement CreateNewElement()
         {

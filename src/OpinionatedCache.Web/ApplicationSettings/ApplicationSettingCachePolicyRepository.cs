@@ -1,5 +1,6 @@
 ﻿﻿// Licensed under the MIT License. See LICENSE.md in the project root for more information.
 
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using OpinionatedCache.API;
@@ -9,12 +10,13 @@ namespace OpinionatedCache.Settings
 {
     public class ApplicationSettingCachePolicyRepository : ICachePolicyRepository
     {
+        private static ICachePolicy s_UnconfiguredPolicy = new DefaultCachePolicy { AbsoluteSeconds = 10 }; // make sure things expire eventually if not configured at all
         private static Dictionary<string, ICachePolicyAdjust> s_Cache = new Dictionary<string, ICachePolicyAdjust>();
+        private static Lazy<CachePolicySection> s_ConfigSection = new Lazy<CachePolicySection>(() => { return ConfigurationManager.GetSection("cachePolicies") as CachePolicySection; });
 
         public ICachePolicy DefaultPolicy()
         {
-            // TODO fetch the default policy from the application settings
-            return new DefaultCachePolicy { AbsoluteSeconds = 10 };
+            return ComputePolicy("*", s_UnconfiguredPolicy); // convention is that "*" is the default policy
         }
 
         public ICachePolicy ComputePolicy(string key, ICachePolicy defaultPolicy)
@@ -34,7 +36,7 @@ namespace OpinionatedCache.Settings
 
         private ICachePolicyAdjust ReadAdjustment(string policyKey, ICachePolicy basePolicy)
         {
-            var config = ConfigurationManager.GetSection("cachePolicies") as CachePolicySection;
+            var config = s_ConfigSection.Value;
 
             if (config != null)
             {

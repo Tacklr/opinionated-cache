@@ -7,15 +7,15 @@ namespace OpinionatedCache.Settings
     public class CachePolicySection : ConfigurationSection
     {
         [ConfigurationProperty("policies", IsDefaultCollection = true)]
-        [ConfigurationCollection(typeof(CachePolicyConfigConfigCollection),
+        [ConfigurationCollection(typeof(CachePolicyConfigurationCollection),
             AddItemName = "add",
             ClearItemsName = "clear",
             RemoveItemName = "remove")]
-        public CachePolicyConfigConfigCollection Policies
+        public CachePolicyConfigurationCollection Policies
         {
             get
             {
-                return (CachePolicyConfigConfigCollection)base["policies"];
+                return (CachePolicyConfigurationCollection)base["policies"];
             }
         }
     }

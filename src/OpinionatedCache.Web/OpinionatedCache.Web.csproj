@@ -40,7 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationSettings\ApplicationSettingCachePolicyRepository.cs" />
-    <Compile Include="ApplicationSettings\CachePolicyConfigConfigCollection.cs" />
+    <Compile Include="ApplicationSettings\CachePolicyConfigurationCollection.cs" />
     <Compile Include="ApplicationSettings\CachePolicyConfigurationElement.cs" />
     <Compile Include="ApplicationSettings\CachePolicySection.cs" />
     <Compile Include="Internals\BaseCacheAddParameters.cs" />
