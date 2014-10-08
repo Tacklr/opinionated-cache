@@ -55,7 +55,7 @@ namespace OpinionatedCache.API.CacheKey
         {
             get
             {
-                return new CachePolicy() { AbsoluteSeconds = 10 };    // every ten second should pepper the backing server nicely
+                return PolicyRepository.DefaultPolicy();
             }
         }
 

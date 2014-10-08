@@ -11,6 +11,12 @@ namespace OpinionatedCache.Settings
     {
         private static Dictionary<string, ICachePolicyAdjust> s_Cache = new Dictionary<string, ICachePolicyAdjust>();
 
+        public ICachePolicy DefaultPolicy()
+        {
+            // TODO fetch the default policy from the application settings
+            return new CachePolicy { AbsoluteSeconds = 10 };
+        }
+
         public ICachePolicy ComputePolicy(string key, ICachePolicy defaultPolicy)
         {
             ICachePolicyAdjust adjuster;

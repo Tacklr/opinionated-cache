@@ -4,6 +4,7 @@ namespace OpinionatedCache.API
 {
     public interface ICachePolicyRepository
     {
+        ICachePolicy DefaultPolicy();
         ICachePolicy ComputePolicy(string policyKey, ICachePolicy defaultPolicy);
     }
 }
