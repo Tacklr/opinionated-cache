@@ -44,7 +44,7 @@
     <Compile Include="Interfaces\ICache.cs" />
     <Compile Include="Interfaces\ICachePolicyAdjust.cs" />
     <Compile Include="Interfaces\ICachePolicyRepository.cs" />
-    <Compile Include="Policy\CachePolicy.cs" />
+    <Compile Include="Policy\DefaultCachePolicy.cs" />
     <Compile Include="Policy\DefaultCachePolicyRepository.cs" />
     <Compile Include="Interfaces\ICachePolicy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

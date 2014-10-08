@@ -6,18 +6,15 @@ namespace OpinionatedCache.Policy
 {
     public class DefaultCachePolicy : ICachePolicy
     {
-        public static readonly int Unused = -1;
-        public static readonly int Infinite = -2;
-
         public int AbsoluteSeconds { get; set; }
         public int SlidingSeconds { get; set; }
         public int RefillCount { get; set; }
 
         public DefaultCachePolicy()
         {
-            AbsoluteSeconds = CachePolicy.Unused;
-            SlidingSeconds = CachePolicy.Unused;
-            RefillCount = CachePolicy.Unused;
+            AbsoluteSeconds = ICachePolicyOptions.Unused;
+            SlidingSeconds = ICachePolicyOptions.Unused;
+            RefillCount = ICachePolicyOptions.Unused;
         }
 
         public virtual ICachePolicy Clone()

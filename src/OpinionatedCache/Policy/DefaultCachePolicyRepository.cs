@@ -10,7 +10,7 @@ namespace OpinionatedCache.Policy
 
         public ICachePolicy DefaultPolicy()
         {
-            return new CachePolicy { AbsoluteSeconds = 10 };    // every 10 seconds should pepper the backing store quite nicely
+            return new DefaultCachePolicy { AbsoluteSeconds = 10 };    // every 10 seconds should pepper the backing store quite nicely
         }
 
         public ICachePolicy ComputePolicy(string policyKey, ICachePolicy defaultPolicy)

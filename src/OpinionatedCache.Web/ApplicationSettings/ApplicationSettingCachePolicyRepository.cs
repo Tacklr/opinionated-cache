@@ -14,7 +14,7 @@ namespace OpinionatedCache.Settings
         public ICachePolicy DefaultPolicy()
         {
             // TODO fetch the default policy from the application settings
-            return new CachePolicy { AbsoluteSeconds = 10 };
+            return new DefaultCachePolicy { AbsoluteSeconds = 10 };
         }
 
         public ICachePolicy ComputePolicy(string key, ICachePolicy defaultPolicy)

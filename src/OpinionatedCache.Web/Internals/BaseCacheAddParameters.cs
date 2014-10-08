@@ -25,7 +25,7 @@ namespace OpinionatedCache.Web
         {
             get
             {
-                if (_absoluteSeconds == CachePolicy.Unused)
+                if (_absoluteSeconds == ICachePolicyOptions.Unused)
                     return Cache.NoAbsoluteExpiration;
 
                 var absolute = DateTime.UtcNow.AddSeconds(_absoluteSeconds);
@@ -38,7 +38,7 @@ namespace OpinionatedCache.Web
             get
             {
                 // Check if infinite refills are allowed
-                if (NumberOfRefillsRemaining == CachePolicy.Infinite)
+                if (NumberOfRefillsRemaining == ICachePolicyOptions.Infinite)
                     return true;
 
                 // if no more refills are allowed (started at <= 0), or used them up
@@ -60,7 +60,7 @@ namespace OpinionatedCache.Web
             Name = name;
             Filler = filler;
             Putter = putter;
-            SlidingTimeout = policy.SlidingSeconds == CachePolicy.Unused
+            SlidingTimeout = policy.SlidingSeconds == ICachePolicyOptions.Unused
                 ? Cache.NoSlidingExpiration
                 : TimeSpan.FromSeconds(policy.SlidingSeconds);
             NumberOfRefillsRemaining = policy.RefillCount;

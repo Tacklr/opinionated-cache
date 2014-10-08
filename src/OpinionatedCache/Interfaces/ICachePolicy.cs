@@ -2,11 +2,18 @@
 
 namespace OpinionatedCache.API
 {
+    public static class ICachePolicyOptions
+    {
+        public static readonly int Infinite = -2;
+        public static readonly int Unused = -1;
+    };
+
     public interface ICachePolicy
     {
         int AbsoluteSeconds { get; set; }
-        ICachePolicy Clone();
-        int RefillCount { get; set; }
         int SlidingSeconds { get; set; }
+        int RefillCount { get; set; }
+
+        ICachePolicy Clone();
     }
 }
