@@ -4,7 +4,7 @@ using OpinionatedCache.API;
 
 namespace OpinionatedCache.Policy
 {
-    public class CachePolicy : ICachePolicy
+    public class DefaultCachePolicy : ICachePolicy
     {
         public static readonly int Unused = -1;
         public static readonly int Infinite = -2;
@@ -13,7 +13,7 @@ namespace OpinionatedCache.Policy
         public int SlidingSeconds { get; set; }
         public int RefillCount { get; set; }
 
-        public CachePolicy()
+        public DefaultCachePolicy()
         {
             AbsoluteSeconds = CachePolicy.Unused;
             SlidingSeconds = CachePolicy.Unused;
@@ -22,7 +22,7 @@ namespace OpinionatedCache.Policy
 
         public virtual ICachePolicy Clone()
         {
-            return new CachePolicy
+            return new DefaultCachePolicy
                 {
                     AbsoluteSeconds = this.AbsoluteSeconds,
                     SlidingSeconds = this.SlidingSeconds,
@@ -32,12 +32,12 @@ namespace OpinionatedCache.Policy
 
         public static ICachePolicy Sliding(int seconds)
         {
-            return new CachePolicy { SlidingSeconds = seconds };
+            return new DefaultCachePolicy { SlidingSeconds = seconds };
         }
 
         public static ICachePolicy Absolute(int seconds)
         {
-            return new CachePolicy { AbsoluteSeconds = seconds };
+            return new DefaultCachePolicy { AbsoluteSeconds = seconds };
         }
     }
 }
