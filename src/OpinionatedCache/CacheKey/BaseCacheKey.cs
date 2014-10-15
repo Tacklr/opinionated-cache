@@ -1,5 +1,6 @@
 ﻿﻿// Licensed under the MIT License. See LICENSE.md in the project root for more information.
 
+using System;
 using OpinionatedCache.Policy;
 
 namespace OpinionatedCache.API.CacheKey
@@ -13,7 +14,8 @@ namespace OpinionatedCache.API.CacheKey
             PolicyRepository = DefaultCachePolicyRepository.Instance;   // allow someone to override the policy management, but the default does nothing.
         }
 
-        private string Prefix;
+        public string Prefix { get; set; }
+        public string SubKey { get; set; }
 
         public BaseCacheKey(string prefix)
         {
@@ -24,30 +26,15 @@ namespace OpinionatedCache.API.CacheKey
         {
             get
             {
-                return Prefix;
+                return BuildKey();
             }
-        }
-
-        protected string BuildKey(string baseKey, string subKey)
-        {
-            return baseKey + "." + subKey;
-        }
-
-        protected string BuildKey(string baseKey, string subKey, string val)
-        {
-            return BuildKey(baseKey, subKey) + "." + val;
-        }
-
-        protected string BuildKey(string baseKey, string subKey, string val1, string val2)
-        {
-            return BuildKey(baseKey, subKey) + "." + val1 + "." + val2;
         }
 
         public virtual string PolicyKey
         {
             get
             {
-                return Prefix + "/";
+                return BuildPolicyKey();    // by default...
             }
         }
 
@@ -68,6 +55,69 @@ namespace OpinionatedCache.API.CacheKey
                 var defaultPolicy = DefaultPolicy;
                 return PolicyRepository.ComputePolicy(policyKey, defaultPolicy); // lookup the policy via the provider
             }
+        }
+
+        // some helper methods for derived classes to use
+        protected string BuildKey()
+        {
+            return String.IsNullOrEmpty(SubKey)
+                            ? Prefix
+                            : Prefix + PolicyRepository.KeySeparator + SubKey;
+        }
+
+        protected string BuildKey(string val)
+        {
+            var sep = PolicyRepository.KeySeparator;
+            return BuildKey() + sep + val;
+        }
+
+        protected string BuildKey(string val1, string val2)
+        {
+            var sep = PolicyRepository.KeySeparator;
+            return BuildKey() + sep + val1 + sep + val2;
+        }
+
+        protected string BuildKey(string val1, string val2, string val3)
+        {
+            var sep = PolicyRepository.KeySeparator;
+            return BuildKey() + sep + val1 + sep + val2 + sep + val3;
+        }
+
+        protected string BuildKey(string val1, string val2, string val3, string val4)
+        {
+            var sep = PolicyRepository.KeySeparator;
+            return BuildKey() + sep + val1 + sep + val2 + sep + val3 + sep + val4;
+        }
+
+        protected string BuildPolicyKey()
+        {
+            return String.IsNullOrEmpty(SubKey)
+                           ? Prefix
+                           : Prefix + PolicyRepository.PolicyKeySeparator + SubKey;
+        }
+
+        protected string BuildPolicyKey(string val)
+        {
+            var sep = PolicyRepository.PolicyKeySeparator;
+            return BuildPolicyKey() + sep + val;
+        }
+
+        protected string BuildPolicyKey(string val1, string val2)
+        {
+            var sep = PolicyRepository.PolicyKeySeparator;
+            return BuildPolicyKey() + sep + val1 + sep + val2;
+        }
+
+        protected string BuildPolicyKey(string val1, string val2, string val3)
+        {
+            var sep = PolicyRepository.PolicyKeySeparator;
+            return BuildPolicyKey() + sep + val1 + sep + val2 + sep + val3;
+        }
+
+        protected string BuildPolicyKey(string val1, string val2, string val3, string val4)
+        {
+            var sep = PolicyRepository.PolicyKeySeparator;
+            return BuildPolicyKey() + sep + val1 + sep + val2 + sep + val3 + sep + val4;
         }
     }
 }

@@ -14,6 +14,15 @@ namespace OpinionatedCache.Settings
         private static Dictionary<string, ICachePolicyAdjust> s_Cache = new Dictionary<string, ICachePolicyAdjust>();
         private static Lazy<CachePolicySection> s_ConfigSection = new Lazy<CachePolicySection>(() => { return ConfigurationManager.GetSection("cachePolicies") as CachePolicySection; });
 
+        public string KeySeparator { get; set; }
+        public string PolicyKeySeparator { get; set; }
+
+        public ApplicationSettingCachePolicyRepository()
+        {
+            KeySeparator = s_ConfigSection.Value.KeySeparator ?? "/";
+            PolicyKeySeparator = s_ConfigSection.Value.PolicyKeySeparator ?? "/";
+        }
+
         public ICachePolicy DefaultPolicy()
         {
             return ComputePolicy("*", s_UnconfiguredPolicy); // convention is that "*" is the default policy

@@ -6,6 +6,12 @@ namespace OpinionatedCache.Settings
 {
     public class CachePolicySection : ConfigurationSection
     {
+        [ConfigurationProperty("keyseparator", IsRequired = false)]
+        public string KeySeparator { get; set; }
+
+        [ConfigurationProperty("policykeyseparator", IsRequired = false)]
+        public string PolicyKeySeparator { get; set; }
+
         [ConfigurationProperty("policies", IsDefaultCollection = true)]
         [ConfigurationCollection(typeof(CachePolicyConfigurationCollection),
             AddItemName = "add",

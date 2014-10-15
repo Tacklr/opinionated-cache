@@ -14,6 +14,9 @@ namespace OpinionatedCache.Web
             WrappedKey = wrappedKey;
         }
 
+        public string Prefix { get { return WrappedKey.Prefix; } set { } }   // don't allow altering it.
+        public string SubKey { get { return WrappedKey.SubKey; } set { } }   // don't allow altering it.
+
         public string Key
         {
             get { return "Refiller" + WrappedKey.Key; }

@@ -7,6 +7,15 @@ namespace OpinionatedCache.Policy
     public class DefaultCachePolicyRepository : ICachePolicyRepository
     {
         public static readonly ICachePolicyRepository Instance = new DefaultCachePolicyRepository();
+     
+        public string KeySeparator { get; set; }
+        public string PolicyKeySeparator { get; set; }
+
+        public DefaultCachePolicyRepository()
+        {
+            KeySeparator = "/";
+            PolicyKeySeparator = "/";
+        }
 
         public ICachePolicy DefaultPolicy()
         {

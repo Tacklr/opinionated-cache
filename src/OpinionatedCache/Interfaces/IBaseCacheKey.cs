@@ -4,6 +4,8 @@ namespace OpinionatedCache.API
 {
     public interface IBaseCacheKey
     {
+        string Prefix { get; set; }
+        string SubKey { get; set; }
         string Key { get; }
         string PolicyKey { get; }
         ICachePolicy DefaultPolicy { get; }
