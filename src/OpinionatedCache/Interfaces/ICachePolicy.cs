@@ -4,8 +4,8 @@ namespace OpinionatedCache.API
 {
     public static class ICachePolicyOptions
     {
-        public static readonly int Infinite = -2;
-        public static readonly int Unused = -1;
+        public const int Infinite = -2;
+        public const int Unused = -1;
     };
 
     public interface ICachePolicy
