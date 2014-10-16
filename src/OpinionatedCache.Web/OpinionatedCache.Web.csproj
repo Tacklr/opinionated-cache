@@ -53,7 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OpinionatedCache\OpinionatedCache.csproj">
-      <Project>{57e2bbe9-c16e-4201-9ee3-7cb28cbfcaac}</Project>
+      <Project>{a0c354d8-54c1-401c-969f-e6cd4f583666}</Project>
       <Name>OpinionatedCache</Name>
     </ProjectReference>
   </ItemGroup>
