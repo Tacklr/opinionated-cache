@@ -58,6 +58,24 @@ namespace OpinionatedCache.API.CacheKey
         }
 
         // some helper methods for derived classes to use
+
+        /// <summary>
+        /// Generates a clone of the provider's DefaultPolicy and sets policy to the requested options
+        /// </summary>
+        /// <param name="absoluteSeconds">Number of seconds that cached items should be retained or <see cref="ICachePolicyOptions.Unused"/> if no absolute timeout eviction.</param>
+        /// <param name="slidingSeconds">Number of seconds that cached items should be retained after each access or <see cref="ICachePolicyOptions.Unused"/> if no sliding timeout eviction.</param>
+        /// <param name="RefillCount">Number of times the cached item should be reloaded automatically after it expires. Defaults to zero automatic refills.</param>
+        /// <returns>an <see cref="ICachePolicy"/> policy that can be modified</returns>
+        /// <remarks>The returned policy can be modified if need. Tis </remarks>
+        protected static ICachePolicy BuildDefaultPolicy(int absoluteSeconds = ICachePolicyOptions.Unused, int slidingSeconds = ICachePolicyOptions.Unused, int refillCount = 0)
+        {
+            var defaultPolicy = PolicyRepository.DefaultPolicy().Clone();
+            defaultPolicy.AbsoluteSeconds = absoluteSeconds;
+            defaultPolicy.SlidingSeconds = slidingSeconds;
+            defaultPolicy.RefillCount = refillCount;
+            return defaultPolicy;
+        }
+
         protected string BuildKey()
         {
             return String.IsNullOrEmpty(SubKey)
