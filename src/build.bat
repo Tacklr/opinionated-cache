@@ -21,5 +21,6 @@ if "%nuget%" == "" (
 mkdir Build
 mkdir Build\lib
 mkdir Build\lib\net40
+mkdir Build\lib\net45
 
 %nuget% pack "src\opinionated-cache.nuspec" -NoPackageAnalysis -verbosity detailed -o Build -Version %version% -p Configuration="%config%"

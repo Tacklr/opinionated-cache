@@ -12,7 +12,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Opinionated Cache provides a framework for consistent cache key and cache policy management for a (potentially multi-level) cache store with backing store.</description>
     <releaseNotes></releaseNotes>
-    <copyright>Copyright &#x00A9; Tacklr, LLC.  All rights reserved.</copyright>
+    <copyright>Copyright &#x00A9; 2009-2014 Tacklr, LLC.  All rights reserved.</copyright>
     <tags>cache cachepolicy httpcache</tags>
   </metadata>
   <files>
