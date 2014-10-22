@@ -76,66 +76,30 @@ namespace OpinionatedCache.API.CacheKey
             return defaultPolicy;
         }
 
-        protected string BuildKey()
+        public string BuildKey()
         {
             return String.IsNullOrEmpty(SubKey)
                             ? Prefix
                             : Prefix + PolicyRepository.KeySeparator + SubKey;
         }
 
-        protected string BuildKey(string val)
+        public string BuildKey(params string[] vals)
         {
             var sep = PolicyRepository.KeySeparator;
-            return BuildKey() + sep + val;
+            return BuildKey() + sep + String.Join(sep, vals);
         }
 
-        protected string BuildKey(string val1, string val2)
-        {
-            var sep = PolicyRepository.KeySeparator;
-            return BuildKey() + sep + val1 + sep + val2;
-        }
-
-        protected string BuildKey(string val1, string val2, string val3)
-        {
-            var sep = PolicyRepository.KeySeparator;
-            return BuildKey() + sep + val1 + sep + val2 + sep + val3;
-        }
-
-        protected string BuildKey(string val1, string val2, string val3, string val4)
-        {
-            var sep = PolicyRepository.KeySeparator;
-            return BuildKey() + sep + val1 + sep + val2 + sep + val3 + sep + val4;
-        }
-
-        protected string BuildPolicyKey()
+        public string BuildPolicyKey()
         {
             return String.IsNullOrEmpty(SubKey)
                            ? Prefix
                            : Prefix + PolicyRepository.PolicyKeySeparator + SubKey;
         }
 
-        protected string BuildPolicyKey(string val)
+        public string BuildPolicyKey(string[] vals)
         {
             var sep = PolicyRepository.PolicyKeySeparator;
-            return BuildPolicyKey() + sep + val;
-        }
-
-        protected string BuildPolicyKey(string val1, string val2)
-        {
-            var sep = PolicyRepository.PolicyKeySeparator;
-            return BuildPolicyKey() + sep + val1 + sep + val2;
-        }
-
-        protected string BuildPolicyKey(string val1, string val2, string val3)
-        {
-            var sep = PolicyRepository.PolicyKeySeparator;
-            return BuildPolicyKey() + sep + val1 + sep + val2 + sep + val3;
-        }
-
-        protected string BuildPolicyKey(string val1, string val2, string val3, string val4)
-        {
-            var sep = PolicyRepository.PolicyKeySeparator;
-            return BuildPolicyKey() + sep + val1 + sep + val2 + sep + val3 + sep + val4;
+            return BuildPolicyKey() + sep + String.Join(sep, vals);
         }
     }
 }

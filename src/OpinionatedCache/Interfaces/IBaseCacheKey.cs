@@ -10,5 +10,10 @@ namespace OpinionatedCache.API
         string PolicyKey { get; }
         ICachePolicy DefaultPolicy { get; }
         ICachePolicy Policy { get; }
+
+        string BuildKey();
+        string BuildKey(params string[] vals);
+        string BuildPolicyKey();
+        string BuildPolicyKey(string[] vals);
     }
 }

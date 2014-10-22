@@ -36,5 +36,25 @@ namespace OpinionatedCache.Web
         {
             get { return WrappedKey.Policy; }
         }
+
+        public string BuildKey()
+        {
+            return WrappedKey.BuildKey();
+        }
+
+        public string BuildKey(params string[] vals)
+        {
+            return WrappedKey.BuildKey(vals);
+        }
+
+        public string BuildPolicyKey()
+        {
+            return WrappedKey.BuildPolicyKey();
+        }
+
+        public string BuildPolicyKey(string[] vals)
+        {
+            return WrappedKey.BuildPolicyKey(vals);
+        }
     }
 }

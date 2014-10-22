@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{57E2BBE9-C16E-4201-9EE3-7CB28CBFCAAC}</ProjectGuid>
+    <ProjectGuid>{A0C354D8-54C1-401C-969F-E6CD4F583666}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>OpinionatedCache</RootNamespace>
