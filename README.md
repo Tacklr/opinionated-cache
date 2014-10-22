@@ -14,7 +14,7 @@ Release notes:
 1.1.1 Making it faster
  * Made the Get method use ```as T``` instead of a ```(T)``` cast so we don't throw when a cache key calls for the wrong kind of object in the cache (e.g. you stored a IFoo, but the cache key being passed is associated with an IBar)
  * The interal ```Log``` method now passes the _detail_ information as a delegate so we don't bother doing the ```ToString()``` and concatenation unless the ```DebugLog``` flag is true.
- * The internal calls to ```Log``` are now ```Conditional``` on the **DEBUG** constant when building, so we don't even attempt to call the method unless you're building form source in **DEBUG**
+ * The internal calls to ```Log``` are now ```Conditional``` on the **DEBUG** constant when building, so we don't even attempt to call the method unless you're building from source in **DEBUG**
 
 1.1 Adding features
  * Added ```Do``` and ```Do<TRet>``` for backing methods that don't return elements that can be cached (```void``` or ```int``` returns for example).
