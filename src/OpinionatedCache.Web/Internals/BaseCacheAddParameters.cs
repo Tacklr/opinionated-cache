@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Web.Caching;
 using OpinionatedCache.API;
 using OpinionatedCache.Caches;
-using OpinionatedCache.Policy;
 
 namespace OpinionatedCache.Web
 {

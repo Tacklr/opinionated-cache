@@ -156,6 +156,38 @@ namespace OpinionatedCache.API
             while (true);
         }
 
+        public static void Do(
+            this ICache cache
+            , Action action
+            , Func<IBaseCacheKey> collectionKeyMaker
+            , params Func<IBaseCacheKey>[] keyProjections)
+        {
+            action();
+
+            foreach (var projection in keyProjections)
+                cache.Clear(projection());
+
+            if (collectionKeyMaker != null)
+                cache.Clear(collectionKeyMaker());
+        }
+        
+        public static TRet Do<TRet>(
+            this ICache cache
+            , Func<TRet> action
+            , Func<IBaseCacheKey> collectionKeyMaker
+            , params Func<TRet, IBaseCacheKey>[] keyProjections)
+        {
+            var value = action();
+
+            foreach (var projection in keyProjections)
+                cache.Clear(projection(value));
+
+            if (collectionKeyMaker != null)
+                cache.Clear(collectionKeyMaker());
+
+            return value;
+        }
+
         public static TElement AddUpdate<TElement>(
             this ICache cache
             , Func<TElement> item
@@ -168,7 +200,7 @@ namespace OpinionatedCache.API
             if (element != null)
             {
                 foreach (var projection in keyProjections)
-                    cache.EnrollRetry(projection(element), ICacheHelper.Once(element));
+                    cache.Clear(projection(element));
 
                 if (collectionKeyMaker != null)
                     cache.Clear(collectionKeyMaker());
