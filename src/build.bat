@@ -6,7 +6,7 @@ if "%config%" == "" (
    set config=Release
 )
  
-set version=1.0.0
+set version=1.1.0
 if not "%PackageVersion%" == "" (
    set version=%PackageVersion%
 )
@@ -20,7 +20,6 @@ if "%nuget%" == "" (
 
 mkdir Build
 mkdir Build\lib
-mkdir Build\lib\net40
 mkdir Build\lib\net45
 
 %nuget% pack "src\opinionated-cache.nuspec" -NoPackageAnalysis -verbosity detailed -o Build -Version %version% -p Configuration="%config%"
