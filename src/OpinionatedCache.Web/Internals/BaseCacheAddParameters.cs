@@ -67,7 +67,7 @@ namespace OpinionatedCache.Web
 
         public virtual Tuple<object, bool> Fill(FreshnessRequest freshness)
         {
-            HttpCacheShim.Log(Name, "Fill" + freshness);
+            HttpCacheShim.Log("Fill", () => "(" + freshness + ") " + Name);
 
             var keyString = Name;
             var startTime = DateTime.UtcNow;
@@ -84,7 +84,7 @@ namespace OpinionatedCache.Web
                         if (NumberOfRefillsRemaining > 0)
                             NumberOfRefillsRemaining--;
 
-                        HttpCacheShim.Log("backfilling " + Name + " remaining " + NumberOfRefillsRemaining, "Refiller");
+                        HttpCacheShim.Log("Refiller", () => "backfilling " + Name + " remaining " + NumberOfRefillsRemaining);
                     }
 
                     var result = Filler(freshness);
@@ -92,7 +92,7 @@ namespace OpinionatedCache.Web
                 }
                 else
                 {
-                    HttpCacheShim.Log(keyString + " already inflight", "Refiller");
+                    HttpCacheShim.Log("Refiller", () => keyString + " already inflight");
                     return Tuple.Create(default(object), true);
                 }
             }
@@ -102,14 +102,14 @@ namespace OpinionatedCache.Web
                 {
                     var endTime = DateTime.UtcNow;
                     s_RunningQueries.TryRemove(keyString, out startTime);
-                    HttpCacheShim.Log(keyString + "@" + startTime + " [" + (endTime - startTime) + "]", "Refiller");
+                    HttpCacheShim.Log("Refiller", () => keyString + " @" + startTime + " [" + (endTime - startTime) + "]");
                 }
             }
         }
 
         public virtual void Put(object value)
         {
-            HttpCacheShim.Log(value, "Put " + Name);
+            HttpCacheShim.Log("Put", () => "[" + Name + "] " + value);
             Putter(this, value);
         }
 

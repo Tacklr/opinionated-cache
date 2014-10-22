@@ -19,10 +19,11 @@ namespace OpinionatedCache.Caches
 
         private static readonly ManualResetEventSlim s_Shutdown = new ManualResetEventSlim(false, 10);  // drop to kernel quickly as this is used for sleeping
 
-        internal static void Log(object value, string left)
+        [Conditional("DEBUG")]
+        internal static void Log(string left, Func<object> resolveValue)
         {
             if (DebugLog)
-                Debug.WriteLine(value, left);
+                Debug.WriteLine(resolveValue(), left);
         }
 
         public void Shutdown()
@@ -39,7 +40,7 @@ namespace OpinionatedCache.Caches
         public T Get<T>(string key)
             where T : class
         {
-            return (T)HttpRuntime.Cache.Get(key);
+            return HttpRuntime.Cache.Get(key) as T;
         }
 
         public IList<TElement> GetCollection<TCollectionKey, TElement>(TCollectionKey collectionKey)
@@ -91,7 +92,11 @@ namespace OpinionatedCache.Caches
                 }
             }
 
-            staleKeysInCache.ForEach(staleKeyInCache => { HttpRuntime.Cache.Remove(staleKeyInCache); Log("Removed stale key from cache: " + staleKeyInCache, "Clear"); });
+            staleKeysInCache.ForEach(staleKeyInCache =>
+                {
+                    HttpRuntime.Cache.Remove(staleKeyInCache);
+                    Log("Clear", () => "Removed stale key from cache: " + staleKeyInCache);
+                });
         }
 
         public Tuple<TElement, bool> EnrollSingle<TElement>(
@@ -267,7 +272,7 @@ namespace OpinionatedCache.Caches
             string key = parameters.Name;
             if (value == null)
             {
-                Log(key + " {REMOVE}", "InternalPut");
+                Log("InternalPut", () => key + " {REMOVE}");
                 HttpRuntime.Cache.Remove(key);
             }
             else
@@ -275,7 +280,7 @@ namespace OpinionatedCache.Caches
                 var callback = MakeCallback(parameters);
                 var absoluteExpiration = parameters.AbsoluteExpiration;
                 var slidingTimeout = parameters.SlidingTimeout;
-                Log(key + "@" + absoluteExpiration + " [" + slidingTimeout + "]", "InternalPut");
+                Log("InternalPut", () => key + " @" + absoluteExpiration + " [" + slidingTimeout + "]");
                 HttpRuntime.Cache.Insert(key, value, null, absoluteExpiration, slidingTimeout, callback);
             }
         }
@@ -302,7 +307,7 @@ namespace OpinionatedCache.Caches
             , out TimeSpan slidingExpiration)
            where T : class
         {
-            Log(cacheKey, "Cache(" + reason + ")");
+            Log("Expired", () => "(" + reason + ") " + cacheKey);
 
             expensiveObject = null;
             dependency = null;
@@ -344,7 +349,7 @@ namespace OpinionatedCache.Caches
 
             internal static void Enqueue(BaseCacheAddParameters parameters)
             {
-                Log(parameters.Name, "RefillQueue");
+                Log("RefillQueue", () => parameters.Name);
 
                 lock (s_BackgroundQueue)
                 {
@@ -360,7 +365,7 @@ namespace OpinionatedCache.Caches
                 {
                     var thread = new Thread(BackgroundThreadProc)
                     {
-                        Name = "BackgroundQueue",
+                        Name = "HttpCacheShimBackgroundQueue",
                         IsBackground = true /* don't want them to stay alive just due to me!*/
                     };
                     Thread.MemoryBarrier();
@@ -400,7 +405,7 @@ namespace OpinionatedCache.Caches
                         }
                         catch (Exception ex)
                         {
-                            Log("Background for " + job.Name + " exception: " + (ex.Message ?? ex.GetType().ToString()), "Refiller");
+                            Log("Refiller", () => "Background for " + job.Name + " exception: " + (ex.Message ?? ex.GetType().ToString()));
 
                             if (!ex.IsWorthRetry())
                             {
