@@ -13,6 +13,7 @@ Release notes:
 
 1.1.2 Fixing Cache Clear of prefixed keys
  * When you do a Clear the key value was _supposed_ to allow passing a prefix string that would clear all entries that start with that prefix. It does this by appending a period (the previous default KeySeparator) to the key given and clearing anything that starts with that prefix. Now that the KeySeparator is settable, we have to ask the IBaseCacheKey for the separator to append so that we get the correct value (currently a forward slash).
+ * This is a **Breaking Change** because I need to expose the PolicyRepository on the ```IBaseCacheKey``` interface. If you are not using your own implementations of ```IBaseCacheKey``` that don't derive from ```BaseCacheKey```, you will have to provide that gettor.
 
 1.1.1 Making it faster
  * Made the Get method use ```as T``` instead of a ```(T)``` cast so we don't throw when a cache key calls for the wrong kind of object in the cache (e.g. you stored a IFoo, but the cache key being passed is associated with an IBar)
