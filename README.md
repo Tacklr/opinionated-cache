@@ -11,6 +11,9 @@ To start using this library, run the following command in the [Package Manager C
 
 Release notes:
 
+1.1.2 Fixing Cache Clear of prefixed keys
+ * When you do a Clear the key value was _supposed_ to allow passing a prefix string that would clear all entries that start with that prefix. It does this by appending a period (the previous default KeySeparator) to the key given and clearing anything that starts with that prefix. Now that the KeySeparator is settable, we have to ask the IBaseCacheKey for the separator to append so that we get the correct value (currently a forward slash).
+
 1.1.1 Making it faster
  * Made the Get method use ```as T``` instead of a ```(T)``` cast so we don't throw when a cache key calls for the wrong kind of object in the cache (e.g. you stored a IFoo, but the cache key being passed is associated with an IBar)
  * The interal ```Log``` method now passes the _detail_ information as a delegate so we don't bother doing the ```ToString()``` and concatenation unless the ```DebugLog``` flag is true.
