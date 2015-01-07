@@ -7,12 +7,14 @@ namespace OpinionatedCache.API.CacheKey
 {
     public abstract class BaseCacheKey : IBaseCacheKey
     {
-        public static ICachePolicyRepository PolicyRepository { get; set; }
+        public static ICachePolicyRepository DefaultPolicyRepository { get; set; }
 
         static BaseCacheKey()
         {
-            PolicyRepository = DefaultCachePolicyRepository.Instance;   // allow someone to override the policy management, but the default does nothing.
+            DefaultPolicyRepository = DefaultCachePolicyRepository.Instance;   // allow someone to override the policy management, but the default does nothing.
         }
+
+        public ICachePolicyRepository PolicyRepository { get { return DefaultPolicyRepository; } }
 
         public string Prefix { get; set; }
         public string SubKey { get; set; }
@@ -66,10 +68,10 @@ namespace OpinionatedCache.API.CacheKey
         /// <param name="slidingSeconds">Number of seconds that cached items should be retained after each access or <see cref="ICachePolicyOptions.Unused"/> if no sliding timeout eviction.</param>
         /// <param name="RefillCount">Number of times the cached item should be reloaded automatically after it expires. Defaults to zero automatic refills.</param>
         /// <returns>an <see cref="ICachePolicy"/> policy that can be modified</returns>
-        /// <remarks>The returned policy can be modified if need. Tis </remarks>
+        /// <remarks>The returned policy can be modified if need.</remarks>
         protected static ICachePolicy BuildDefaultPolicy(int absoluteSeconds = ICachePolicyOptions.Unused, int slidingSeconds = ICachePolicyOptions.Unused, int refillCount = 0)
         {
-            var defaultPolicy = PolicyRepository.DefaultPolicy().Clone();
+            var defaultPolicy = DefaultPolicyRepository.DefaultPolicy().Clone();
             defaultPolicy.AbsoluteSeconds = absoluteSeconds;
             defaultPolicy.SlidingSeconds = slidingSeconds;
             defaultPolicy.RefillCount = refillCount;

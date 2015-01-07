@@ -15,5 +15,6 @@ namespace OpinionatedCache.API
         string BuildKey(params string[] vals);
         string BuildPolicyKey();
         string BuildPolicyKey(string[] vals);
+        /*static*/ ICachePolicyRepository PolicyRepository { get; }
     }
 }

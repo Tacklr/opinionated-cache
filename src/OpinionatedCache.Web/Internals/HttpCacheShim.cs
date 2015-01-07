@@ -79,7 +79,7 @@ namespace OpinionatedCache.Caches
 
             var staleKeysInCache = new List<string>();
             var keyAsString = key.Key;
-            var keyAsBaseString = keyAsString + ".";
+            var keyAsBaseString = keyAsString + key.PolicyRepository.KeySeparator;
             var enumerator = HttpRuntime.Cache.GetEnumerator();
 
             while (enumerator.MoveNext())

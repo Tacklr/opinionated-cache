@@ -27,6 +27,11 @@ namespace OpinionatedCache.Web
             get { return WrappedKey.PolicyKey; }
         }
 
+        public ICachePolicyRepository PolicyRepository
+        {
+            get { return WrappedKey.PolicyRepository; }
+        }
+
         public ICachePolicy DefaultPolicy
         {
             get { return WrappedKey.DefaultPolicy; }
