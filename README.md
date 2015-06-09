@@ -7,6 +7,7 @@ To start using this library, run the following command in the [Package Manager C
 
     PM> Install-Package opinionated-cache
 
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/n9deo3wbippnupwo?svg=true)](https://ci.appveyor.com/project/IDisposable/opinionated-cache)
 [![opinionated-cache MyGet Build Status](https://www.myget.org/BuildSource/Badge/opinionated-cache?identifier=7067f82c-0d7b-4440-aef6-4650fd8e9e04)](https://www.myget.org/)
 
 Release notes:
