@@ -10,6 +10,9 @@ To start using this library, run the following command in the [Package Manager C
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/n9deo3wbippnupwo?svg=true)](https://ci.appveyor.com/project/IDisposable/opinionated-cache)
 [![opinionated-cache MyGet Build Status](https://www.myget.org/BuildSource/Badge/opinionated-cache?identifier=7067f82c-0d7b-4440-aef6-4650fd8e9e04)](https://www.myget.org/)
 
+This project adheres to the [Open Code of Conduct][code-of-conduct]. By participating, you are expected to honor this code.
+[code-of-conduct]: http://todogroup.org/opencodeofconduct/#Tacklr/abuse@tacklr.com
+
 Release notes:
 
 1.1.2 Fixing Cache Clear of prefixed keys
